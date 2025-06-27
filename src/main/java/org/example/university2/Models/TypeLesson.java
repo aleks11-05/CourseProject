@@ -1,5 +1,7 @@
 package org.example.university2.Models;
 
+import javafx.beans.property.*;
+
 public class TypeLesson {
     private int id;
     private String name;
@@ -10,6 +12,9 @@ public class TypeLesson {
         this.id = id;
         this.name = name;
     }
+
+
+
 
     public int getId() {
         return id;

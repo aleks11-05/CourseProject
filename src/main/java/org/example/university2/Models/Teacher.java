@@ -4,21 +4,21 @@ public class Teacher {
     private int id;
     private String position;
     private String degree;
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private String first_name;
+    private String middle_name;
+    private String last_name;
     private String residence;
     private int experience;
 
     public Teacher() {}
 
-    public Teacher(int id, String position, String degree, String firstName, String middleName, String lastName, String residence, int experience) {
+    public Teacher(int id, String position, String degree, String first_name, String middle_name, String last_name, String residence, int experience) {
         this.id = id;
         this.position = position;
         this.degree = degree;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.middle_name = middle_name;
+        this.last_name = last_name;
         this.residence = residence;
         this.experience = experience;
     }
@@ -48,27 +48,27 @@ public class Teacher {
     }
 
     public String getFirstName() {
-        return firstName;
+        return first_name;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.first_name = firstName;
     }
 
     public String getMiddleName() {
-        return middleName;
+        return middle_name;
     }
 
     public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+        this.middle_name = middleName;
     }
 
     public String getLastName() {
-        return lastName;
+        return last_name;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.last_name = lastName;
     }
 
     public String getResidence() {

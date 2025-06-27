@@ -2,21 +2,21 @@ package org.example.university2.Models;
 
 public class DistributionOfAcademicHours {
     private int id;
-    private int subjectId;
-    private int groupaId;
-    private int teacherId;
-    private int lessonTypeId;
+    private int subject_id;
+    private int groupa_id;
+    private int teacher_id;
+    private int lesson_type_id;
     private int semester;
     private int year;
 
     public DistributionOfAcademicHours() {}
 
-    public DistributionOfAcademicHours(int id, int subjectId, int groupaId, int teacherId, int lessonTypeId, int semester, int year) {
+    public DistributionOfAcademicHours(int id, int subject_id, int groupa_id, int teacher_id, int lesson_type_id, int semester, int year) {
         this.id = id;
-        this.subjectId = subjectId;
-        this.groupaId = groupaId;
-        this.teacherId = teacherId;
-        this.lessonTypeId = lessonTypeId;
+        this.subject_id = subject_id;
+        this.groupa_id = groupa_id;
+        this.teacher_id = teacher_id;
+        this.lesson_type_id = lesson_type_id;
         this.semester = semester;
         this.year = year;
     }
@@ -29,36 +29,36 @@ public class DistributionOfAcademicHours {
         this.id = id;
     }
 
-    public int getSubjectId() {
-        return subjectId;
+    public int getSubject_id() {
+        return subject_id;
     }
 
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
+    public void setSubject_id(int subject_id) {
+        this.subject_id = subject_id;
     }
 
-    public int getGroupaId() {
-        return groupaId;
+    public int getGroupa_id() {
+        return groupa_id;
     }
 
-    public void setGroupaId(int groupaId) {
-        this.groupaId = groupaId;
+    public void setGroupa_id(int groupa_id) {
+        this.groupa_id = groupa_id;
     }
 
-    public int getTeacherId() {
-        return teacherId;
+    public int getTeacher_id() {
+        return teacher_id;
     }
 
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacher_id(int teacher_id) {
+        this.teacher_id = teacher_id;
     }
 
-    public int getLessonTypeId() {
-        return lessonTypeId;
+    public int getLesson_type_id() {
+        return lesson_type_id;
     }
 
-    public void setLessonTypeId(int lessonTypeId) {
-        this.lessonTypeId = lessonTypeId;
+    public void setLesson_type_id(int lesson_type_id) {
+        this.lesson_type_id = lesson_type_id;
     }
 
     public int getSemester() {
@@ -66,6 +66,9 @@ public class DistributionOfAcademicHours {
     }
 
     public void setSemester(int semester) {
+        if (semester < 1 || semester > 2) {
+            throw new IllegalArgumentException("Semester must be 1 or 2");
+        }
         this.semester = semester;
     }
 
@@ -74,6 +77,9 @@ public class DistributionOfAcademicHours {
     }
 
     public void setYear(int year) {
+        if (year < 2000 || year > 2100) {
+            throw new IllegalArgumentException("Year must be between 2000 and 2100");
+        }
         this.year = year;
     }
 }

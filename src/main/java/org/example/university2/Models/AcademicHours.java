@@ -1,39 +1,39 @@
 package org.example.university2.Models;
 
 public class AcademicHours {
-    private int subjectId;
-    private int lessonTypeId;
-    private int numAkHours;
+    private int subject_id;
+    private int lesson_type_id;
+    private int num_ak_hours;
 
     public AcademicHours() {}
 
-    public AcademicHours(int subjectId, int lessonTypeId, int numAkHours) {
-        this.subjectId = subjectId;
-        this.lessonTypeId = lessonTypeId;
-        this.numAkHours = numAkHours;
+    public AcademicHours(int subject_id, int lesson_type_id, int num_ak_hours) {
+        this.subject_id = subject_id;
+        this.lesson_type_id = lesson_type_id;
+        this.num_ak_hours = num_ak_hours;
     }
 
     public int getSubjectId() {
-        return subjectId;
+        return subject_id;
     }
 
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
+    public void setSubjectId(int subject_id) {
+        this.subject_id = subject_id;
     }
 
     public int getLessonTypeId() {
-        return lessonTypeId;
+        return lesson_type_id;
     }
 
-    public void setLessonTypeId(int lessonTypeId) {
-        this.lessonTypeId = lessonTypeId;
+    public void setLessonTypeId(int lesson_type_id) {
+        this.lesson_type_id = lesson_type_id;
     }
 
     public int getNumAkHours() {
-        return numAkHours;
+        return num_ak_hours;
     }
 
-    public void setNumAkHours(int numAkHours) {
-        this.numAkHours = numAkHours;
+    public void setNumAkHours(int num_ak_hours) {
+        this.num_ak_hours = num_ak_hours;
     }
 }

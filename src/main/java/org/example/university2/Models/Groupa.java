@@ -2,14 +2,14 @@ package org.example.university2.Models;
 
 public class Groupa {
     private int id;
-    private String groupaNumber;
+    private String groupa_number;
     private int size;
 
     public Groupa() {}
 
-    public Groupa(int id, String groupaNumber, int size) {
+    public Groupa(int id, String groupa_number, int size) {
         this.id = id;
-        this.groupaNumber = groupaNumber;
+        this.groupa_number = groupa_number;
         this.size = size;
     }
 
@@ -22,11 +22,11 @@ public class Groupa {
     }
 
     public String getGroupaNumber() {
-        return groupaNumber;
+        return groupa_number;
     }
 
     public void setGroupaNumber(String groupaNumber) {
-        this.groupaNumber = groupaNumber;
+        this.groupa_number = groupa_number;
     }
 
     public int getSize() {
