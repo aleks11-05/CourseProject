@@ -1,4 +1,4 @@
-package org.example.university2;
+package org.example.university2.Models;
 
 public class AcademicHours {
     private int subjectId;

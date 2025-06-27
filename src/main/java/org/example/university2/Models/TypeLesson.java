@@ -1,14 +1,12 @@
-package org.example.university2;
+package org.example.university2.Models;
 
-
-
-public class Subject {
+public class TypeLesson {
     private int id;
     private String name;
 
-    public Subject() {}
+    public TypeLesson() {}
 
-    public Subject(int id, String name) {
+    public TypeLesson(int id, String name) {
         this.id = id;
         this.name = name;
     }
