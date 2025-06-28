@@ -14,7 +14,6 @@ public class UserDAO {
         this.connection = DBConnection.getInstance().getConnection();
     }
 
-    // Получить всех пользователей
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM User ORDER BY id";
@@ -35,7 +34,7 @@ public class UserDAO {
         return users;
     }
 
-    // Создать нового пользователя
+
     public void create(User user) {
         String sql = "INSERT INTO User (username, password, role_id) VALUES (?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -54,7 +53,7 @@ public class UserDAO {
         }
     }
 
-    // Обновить пользователя
+
     public void update(User user) {
         String sql = "UPDATE User SET username=?, password=?, role_id=? WHERE id=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -68,7 +67,6 @@ public class UserDAO {
         }
     }
 
-    // Удалить пользователя по id
     public void delete(int id) {
         String sql = "DELETE FROM User WHERE id=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {

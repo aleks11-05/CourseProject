@@ -1,98 +1,73 @@
 package org.example.university2.View;
 
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import org.example.university2.Models.Role;
-import org.example.university2.Models.User;
-import org.example.university2.Containers.Users;
+import org.example.university2.Controller.UserMainController;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
-public class UserView {
-    private final Users usersModel;
-    private final BorderPane view;
-    private final TableView<User> userTable;
-    private final ComboBox<Role> roleComboBox;
+public class UserMainView {
+    private final UserMainController controller;
+    private final TabPane tabPane;
 
-    public UserView(Users usersModel) {
-        this.usersModel = usersModel;
+    public UserMainView(UserMainController controller) {
+        this.controller = controller;
+        this.tabPane = new TabPane();
 
-        userTable = new TableView<>();
-        setupUserTable();
+        tabPane.setTabDragPolicy(TabPane.TabDragPolicy.FIXED);
 
-        roleComboBox = new ComboBox<>();
-        Button addButton = new Button("Добавить");
-        Button deleteButton = new Button("Удалить");
-        Button refreshButton = new Button("Обновить");
-
-        setupEventHandlers(addButton, deleteButton, refreshButton);
-
-        HBox toolbar = new HBox(10, roleComboBox, addButton, deleteButton, refreshButton);
-        toolbar.setPadding(new Insets(10, 10, 10, 10));
-
-        view = new BorderPane();
-        view.setCenter(userTable);
-        view.setBottom(toolbar);
-
-        refreshData();
+        setupTabs();
     }
 
-    private void setupUserTable() {
-        TableColumn<User, Integer> idColumn = new TableColumn<>("ID");
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    private void setupTabs() {
+        VBox teachersView = controller.getTeachersContactsController().getView().getView();
+        VBox groupsView = controller.getGroupTypeSubjectController().getView().getView();
+        VBox hoursView = controller.getAcademicHoursController().getView().getView();
 
-        TableColumn<User, String> usernameColumn = new TableColumn<>("Логин");
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        disableEditingInChildren(teachersView);
+        disableEditingInChildren(groupsView);
+        disableEditingInChildren(hoursView);
 
-        TableColumn<User, String> roleColumn = new TableColumn<>("Роль");
-        roleColumn.setCellValueFactory(cellData -> {
-            User user = cellData.getValue();
-            return new javafx.beans.property.SimpleStringProperty(
-                    String.valueOf(user.getRoleId()) // Или название роли, если есть связь
-            );
-        });
+        Tab teachersContactsTab = createReadOnlyTab("Преподаватели и контакты", teachersView);
+        Tab groupTypeSubjectTab = createReadOnlyTab("Группы, типы и предметы", groupsView);
+        Tab academicHoursTab = createReadOnlyTab("Академические часы", hoursView);
 
-        userTable.getColumns().addAll(idColumn, usernameColumn, roleColumn);
-        userTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tabPane.getTabs().addAll(teachersContactsTab, groupTypeSubjectTab, academicHoursTab);
+        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
     }
 
-    private void setupEventHandlers(Button addButton, Button deleteButton, Button refreshButton) {
-        addButton.setOnAction(e -> {
-            User newUser = new User(0, "newuser", "password", 2); // role_id=2 (например, для 'user')
-            usersModel.addUser(newUser);
-            refreshData();
-        });
+    private Tab createReadOnlyTab(String title, Node content) {
+        Tab tab = new Tab(title);
+        tab.setContent(content);
+        tab.setClosable(false);
+        return tab;
+    }
 
-        deleteButton.setOnAction(e -> {
-            User selectedUser = userTable.getSelectionModel().getSelectedItem();
-            if (selectedUser != null) {
-                usersModel.deleteUser(selectedUser);
-                refreshData();
-            } else {
-                showAlert("Не выбран пользователь", "Пожалуйста, выберите пользователя для удаления");
+    private void disableEditingInChildren(Parent parent) {
+        for (Node node : parent.getChildrenUnmodifiable()) {
+            if (node instanceof TableView) {
+                TableView<?> tableView = (TableView<?>) node;
+                tableView.setEditable(false);
+                tableView.getColumns().forEach(col -> col.setEditable(false));
+            } else if (node instanceof TextInputControl) {
+                ((TextInputControl) node).setEditable(false);
+            } else if (node instanceof ComboBoxBase) {
+                ((ComboBoxBase<?>) node).setEditable(false);
+            } else if (node instanceof Parent) {
+                disableEditingInChildren((Parent) node);
             }
-        });
-
-        refreshButton.setOnAction(e -> refreshData());
+        }
     }
 
-    private void refreshData() {
-        ObservableList<User> users = usersModel.getUsers();
-        userTable.setItems(users);
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    public BorderPane getView() {
-        return view;
+    public VBox getView() {
+        VBox root = new VBox(10);
+        root.setPadding(new Insets(10));
+        root.getChildren().add(tabPane);
+        return root;
     }
 }
